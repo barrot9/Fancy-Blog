@@ -19,12 +19,12 @@ app.get("/", (req, res) => {
     res.render("index.ejs" , { currentPage: 'Home' });
 });
 
-app.post("/Essays", (req, res) => {
+app.post("/Posts", (req, res) => {
     const blogContent = req.body.blogContent;
     if(blogContent){
     Essays.push(blogContent);
     }
-    res.render("Essays.ejs" , { currentPage: 'Essays', Essays: Essays  });
+    res.render("Posts.ejs" , { currentPage: 'Essays', Essays: Essays  });
 });
 
 app.post("/About", (req, res) => {

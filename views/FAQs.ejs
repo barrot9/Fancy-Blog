@@ -4,27 +4,13 @@
     <div class="p-5 text-center bg-body-tertiary rounded-3">
       <h1 class="text-body-emphasis">FAQs</h1>
       <p class="lead">
-        This is the place to ask anything you like. We are here to answer any question that comes to your mind!
+        Future page
       </p>
-      <form action="/FAQs" method="POST">
-        <label for="blogContent" class="d-inline-flex align-items-center btn btn-lg px-4">Add a question</label><br>
-        <textarea id="blogContent" name="blogContent" rows="4" cols="50"></textarea><br><br>
-        <button class="d-inline-flex align-items-center btn btn-primary btn-lg px-4 rounded-pill" type="submit">Submit</button>
-      </form>
+      
     
-      <% if(FAQs.length > 0) { %>
-        <h2>Existing Posts:</h2>
-        <ul class="main-ul">
-            <% FAQs.forEach(function(post, index) { %>
-                <li class="main-li"><%= post %></li>
-                <form action="/deleteFAQs/<%= index %>?_method=DELETE" method="POST" style="display: inline;">
-                    <button class="btn btn-danger" type="submit">Delete</button>
-                </form>
-            <% }); %>
-        </ul>
-        <% } else { %>
+      
             <p>No posts yet.</p>
-        <% } %>
+        
     </div>
 </div>
 
