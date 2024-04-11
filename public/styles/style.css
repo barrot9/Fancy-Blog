@@ -7,4 +7,14 @@
     margin-bottom: 10px;
     padding: 10px;
 }
+.entry-header{
+    text-align: center;
+    color: white;
+    margin-top: 100px;
+    border-bottom: 1px solid grey;
+    padding-bottom: 10px;
+}
+.text-body-emphasis{
+    padding-bottom: 50px;
+}
 
