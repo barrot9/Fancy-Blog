@@ -28,7 +28,7 @@ let texts = [
 
 app.get("/", async (req, res) => {
     try{
-        const result = await db.query("SELECT * FROM posts");
+        const result = await db.query("SELECT * FROM posts ORDER BY post_id ASC");
         texts = result.rows;
         res.render("index.ejs" , { currentPage: 'Home' , Title: "Posts:", posts: texts, });
     }
@@ -38,89 +38,41 @@ app.get("/", async (req, res) => {
     
 });
 
-// app.post("/Posts", (req, res) => {
-//     // const blogContent = req.body.blogContent;
-//     // if(blogContent){
-//     // Essays.push(blogContent);
-//     // }
-//     // res.render("Posts.ejs" , { currentPage: 'Essays', Essays: Essays  });
+app.post("/add", async (req, res) => {
+    const item = req.body.newItem;
+    try {
+      await db.query("INSERT INTO posts (post_content) VALUES ($1)", [item]);
+      res.redirect("/");
+    } catch (err) {
+      console.log(err);
+    }
+});
 
-// });
+app.post("/edit", async (req, res) => {
+    const item = req.body.updatedItemTitle;
+    const id = req.body.updatedItemId;
+    try {
+      await db.query("UPDATE posts SET post_content = ($1) WHERE post_id = $2", [item, id]);
+      res.redirect("/");
+    } catch (err) {
+      console.log(err);
+    }
+});
+
+app.post("/delete", async (req, res) => {
+    const id = req.body.deleteItemId;
+    try {
+      await db.query("DELETE FROM posts WHERE post_id = $1", [id]);
+      res.redirect("/");
+    } catch (err) {
+      console.log(err);
+    }
+});
 
 app.post("/About", (req, res) => {
     res.render("About.ejs" , { currentPage: 'About' });
 });
 
-app.post("/FAQs", (req, res) => {
-    const blogContent = req.body.blogContent;
-    if(blogContent){
-    FAQs.push(blogContent);
-    }
-    res.render("FAQs.ejs" , { currentPage: 'FAQs', FAQs: FAQs });
-});
-
-
-//let posts = [{ id: 1, title: "test" }];
-
-app.post("/Books", async (req, res) => {
-    try {
-        //const result = await db.query("SELECT * FROM posts");
-        //posts = result.rows;
-    
-        res.render("Books.ejs", {
-          Title: "Today",
-        });
-      } catch (err) {
-        console.log(err);
-      }
-});
-
-app.post("/Quotes", (req, res) => {
-    const blogContent = req.body.blogContent;
-    if(blogContent){
-    Quotes.push(blogContent);
-    }
-    res.render("Quotes.ejs" , { currentPage: 'Quotes', Quotes: Quotes });
-});
-
-// Handle deletion of the last post
-app.post('/deleteEssays/:index', (req, res) => {
-    const index = req.params.index; // Get the index of the post to be deleted
-    Essays.splice(index, 1); // Remove the post from the posts array
-    //const redirectUrl = req.body.redirect || '/';
-    res.redirect('/'); // Redirect to the homepage to display the updated posts
-});
-
-app.post('/deleteBooks/:index', (req, res) => {
-    const index = req.params.index; // Get the index of the post to be deleted
-    Books.splice(index, 1); // Remove the post from the posts array
-    res.redirect(`/`); // Redirect to the homepage to display the updated posts
-});
-
-app.post('/deleteQuotes/:index', (req, res) => {
-    const index = req.params.index; // Get the index of the post to be deleted
-    Quotes.splice(index, 1); // Remove the post from the posts array
-    res.redirect(`/`); // Redirect to the homepage to display the updated posts
-});
-
-app.post('/deleteFAQs/:index', (req, res) => {
-    const index = req.params.index; // Get the index of the post to be deleted
-    FAQs.splice(index, 1); // Remove the post from the posts array
-    res.redirect(`/`); // Redirect to the homepage to display the updated posts
-});
-
-app.get('/edit/:index', (req, res) => {
-    const index = req.params.index;
-    const postToEdit = Essays[index];
-    res.render('edit.ejs', { index: index, post: postToEdit });
-});
-
-app.post('/edit/:index', (req, res) => {
-    const index = req.params.index;
-    const updatedPost = req.body.updatedPost; // Assuming the form field name is "updatedPost"
-    Essays[index] = updatedPost; // Update the post content in the array
-    res.redirect('/'); // Redirect to the homepage to display the updated posts
-});
 
 app.listen(port, () => {
     console.log(`Listening on port ${port}`);
