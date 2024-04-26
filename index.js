@@ -14,20 +14,28 @@ app.use(express.static("public"));
 const db = new pg.Client({
     user: "postgres",
     host: "localhost",
-    database: "posts",
+    database: "FancyBlog",
     password: "a123456",
     port: 5432,
 });
+
 db.connect();
 
-let posts = [];
-let Essays = [];
-let Books = [];
-let Quotes = [];
-let FAQs = [];
+let texts = [
+    { post_id: 1, post_content: "test1" },
+    { post_id: 2, post_content: "test2" },
+  ];
 
-app.get("/", (req, res) => {
-    res.render("index.ejs" , { currentPage: 'Home' });
+app.get("/", async (req, res) => {
+    try{
+        const result = await db.query("SELECT * FROM posts");
+        texts = result.rows;
+        res.render("index.ejs" , { currentPage: 'Home' , Title: "Posts:", posts: texts, });
+    }
+    catch (err) {
+        console.log(err);
+    }
+    
 });
 
 // app.post("/Posts", (req, res) => {
@@ -38,20 +46,6 @@ app.get("/", (req, res) => {
 //     // res.render("Posts.ejs" , { currentPage: 'Essays', Essays: Essays  });
 
 // });
-
-app.post("/Posts", async (req, res) => {
-    try {
-      const postContent = await db.query("SELECT * FROM posts");
-      posts = postContent.rows;
-  
-      res.render("Posts.ejs", {
-        postsTitle: "Posts:",
-        posts: posts,
-      });
-    } catch (err) {
-      console.log(err);
-    }
-  });
 
 app.post("/About", (req, res) => {
     res.render("About.ejs" , { currentPage: 'About' });
@@ -65,12 +59,20 @@ app.post("/FAQs", (req, res) => {
     res.render("FAQs.ejs" , { currentPage: 'FAQs', FAQs: FAQs });
 });
 
-app.post("/Books", (req, res) => {
-    const blogContent = req.body.blogContent;
-    if(blogContent){
-    Books.push(blogContent);
-    }
-    res.render("Books.ejs" , { currentPage: 'Books', Books: Books });
+
+//let posts = [{ id: 1, title: "test" }];
+
+app.post("/Books", async (req, res) => {
+    try {
+        //const result = await db.query("SELECT * FROM posts");
+        //posts = result.rows;
+    
+        res.render("Books.ejs", {
+          Title: "Today",
+        });
+      } catch (err) {
+        console.log(err);
+      }
 });
 
 app.post("/Quotes", (req, res) => {
