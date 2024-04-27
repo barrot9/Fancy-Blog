@@ -18,7 +18,7 @@
     <body>
         <div class="container">
             <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
-              <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">    
+              <a href="/index" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">    
                 <svg xmlns="http://www.w3.org/2000/svg" width="40" height="32" fill="currentColor" class="bi bi-brilliance me-2" viewBox="0 0 16 16">
                     <path d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16M1 8a7 7 0 0 0 7 7 3.5 3.5 0 1 0 0-7 3.5 3.5 0 1 1 0-7 7 7 0 0 0-7 7"/>
                 </svg>
@@ -26,11 +26,11 @@
               </a>
         
               <ul class="nav nav-pills">
-                <li class="nav-item"><form action="/" method="GET"><button type="submit" class="nav-link <%= currentPage === 'Home' ? 'active' : '' %>">Home</button></form></li>
+                <li class="nav-item"><form action="/index" method="GET"><button type="submit" class="nav-link <%= currentPage === 'Home' ? 'active' : '' %>">Home</button></form></li>
                 <li class="nav-item"><form action="/Books" method="POST"><button type="submit" class="nav-link <%= currentPage === 'Books' ? 'active' : '' %>">Books</button></form></li>
                 <li class="nav-item"><form action="/Quotes" method="POST"><button type="submit" class="nav-link <%= currentPage === 'Quotes' ? 'active' : '' %>">Resourses</button></form></li>
                 <li class="nav-item"><form action="/FAQs" method="POST"><button type="submit" class="nav-link <%= currentPage === 'FAQs' ? 'active' : '' %>">FAQs</button></form></li>
-                <li class="nav-item"><form action="/About" method="POST"><button type="submit" class="nav-link <%= currentPage === 'About' ? 'active' : '' %>">About</button></form></li>  
+                <li class="nav-item"><form action="/About" method="GET"><button type="submit" class="nav-link <%= currentPage === 'About' ? 'active' : '' %>">About</button></form></li>  
               </ul>
             </header>
           </div>

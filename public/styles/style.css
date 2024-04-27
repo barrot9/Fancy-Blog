@@ -26,15 +26,23 @@
 form.edit {
     display: flex;
 }
-/* .space-between{
-    display: flex;
-    justify-content: space-between;
-} */
 .item {
     min-height: 70px;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     border-bottom: 1px solid #f1f1f1;
+}
+/* .left-elements {
+    display: flex;
+    align-items: center;
+}
+.left-elements form,
+.left-elements p {
+  margin-right: 10px; /* Adjust margin between form and p element as needed 
+} */
+.right-elements {
+    margin-left: auto;
 }
 .item:last-child {
     border-bottom: 0;

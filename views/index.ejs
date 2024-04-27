@@ -14,21 +14,25 @@
       <div class="box">
         <% for(let post of posts){%>
         <div class="item">
+          <div class="left-elemets">
             <form action="/delete" method="post">
               <input type="checkbox" onchange="this.form.submit()" name="deleteItemId" value="<%= post.post_id %>">
             </form>
             <p id="title<%=post.post_id%>">
               <%= post.post_content %>
             </p>
-          <form class="edit" action="/edit" method="post">
-            <input type="hidden" name="updatedItemId" value="<%= post.post_id %>">
-            <input id="input<%= post.post_id %>" type="text" name="updatedItemTitle" value="<%= post.post_content %>" autocomplete="off"
-              autofocus="true" hidden="true">
-            <button id="done<%=post.post_id%>" class="edit" type="submit" hidden><img class="icon"
-                src="/images/check-solid.svg" alt="tick image"></button>
-          </form>
-          <button id="edit<%=post.post_id%>" class="edit" onclick="handler('<%=post.post_id%>')"><img class="icon"
-            src="/images/pencil-solid.svg" alt="pencil image"></button>
+          </div>
+          <div class="right-elements">
+            <form class="edit" action="/edit" method="post">
+              <input type="hidden" name="updatedItemId" value="<%= post.post_id %>">
+              <input id="input<%= post.post_id %>" type="text" name="updatedItemTitle" value="<%= post.post_content %>" autocomplete="off"
+                autofocus="true" hidden="true">
+              <button id="done<%=post.post_id%>" class="edit" type="submit" hidden><img class="icon"
+                  src="/images/check-solid.svg" alt="tick image"></button>
+            </form>
+            <button id="edit<%=post.post_id%>" class="edit" onclick="handler('<%=post.post_id%>')"><img class="icon"
+              src="/images/pencil-solid.svg" alt="pencil image"></button>
+          </div>
         </div>
         <% } %>
         <form class="item" action="/add" method="post">
