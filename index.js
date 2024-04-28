@@ -4,6 +4,7 @@ import { dirname } from "path";
 import { fileURLToPath } from "url";
 import pg from "pg";
 import bcrypt from "bcrypt";
+import env from "dotenv";
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const app = express();
@@ -12,6 +13,7 @@ const saltRounds = 10;
 
 app.use(bodyParser.urlencoded({ extended: true}));
 app.use(express.static("public"));
+env.config();
 
 const db = new pg.Client({
     user: process.env.POSTGRES_USER,
