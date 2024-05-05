@@ -71,6 +71,9 @@ button.add {
 .add-post{
     height: 70px;
 }
+.post-content{
+    padding: 20px;
+}
    input[type="text"] {
     text-align: left;
     height: 60px;

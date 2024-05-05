@@ -16,9 +16,10 @@
         <div class="item">
           <div class="left-elemets">
             
-            <p id="title<%=post.post_id%>">
+            <p class="post-content" id="title<%=post.post_id%>">
               <%= post.post_content %>
             </p>
+            <p>comment <%= post.post_id %></p>
           </div>
           <div class="right-elements">
             <form action="/delete" method="post">
