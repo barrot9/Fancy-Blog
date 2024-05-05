@@ -42,6 +42,7 @@ form.edit {
   margin-right: 10px; /* Adjust margin between form and p element as needed 
 } */
 .right-elements {
+    display: flex;
     margin-left: auto;
 }
 .item:last-child {
@@ -56,21 +57,21 @@ button.add {
     width: 50px;
     border-radius: 50%;
     border-color: transparent;
-    background-color: #a683e3;
+    /* background-color: #a683e3; */
     color: #fff;
     font-size: 30px;
     border-width: 0;
 }
-button.edit {
-    margin-left: 0px;
-    margin-right: 20px;
-    border: none;
-    background: none;
+.heighten{
+    height: 50px;
 }
 .icon {
-    height: 20px;
+    height: 30px;
 }
-  input[type="text"] {
+.add-post{
+    height: 70px;
+}
+   input[type="text"] {
     text-align: left;
     height: 60px;
     top: 10px;
@@ -82,7 +83,7 @@ button.edit {
 }
   input[type="text"]:focus {
     outline: none;
-    box-shadow: inset 0 -3px 0 0 #a683e3;
+    box-shadow: inset 0 -3px 0 0 #6424db;
 }
   ::placeholder {
     color: lightgray;

@@ -15,14 +15,16 @@
         <% for(let post of posts){%>
         <div class="item">
           <div class="left-elemets">
-            <form action="/delete" method="post">
-              <input type="checkbox" onchange="this.form.submit()" name="deleteItemId" value="<%= post.post_id %>">
-            </form>
+            
             <p id="title<%=post.post_id%>">
               <%= post.post_content %>
             </p>
           </div>
           <div class="right-elements">
+            <form action="/delete" method="post">
+              <button type="submit" class="btn btn-dark heighten" name="deleteItemId" value="<%= post.post_id %>"><img class="icon"
+                src="/images/trash.svg" alt="delete icon"></button>
+            </form>
             <form class="edit" action="/edit" method="post">
               <input type="hidden" name="updatedItemId" value="<%= post.post_id %>">
               <input id="input<%= post.post_id %>" type="text" name="updatedItemTitle" value="<%= post.post_content %>" autocomplete="off"
@@ -30,14 +32,15 @@
               <button id="done<%=post.post_id%>" class="edit" type="submit" hidden><img class="icon"
                   src="/images/check-solid.svg" alt="tick image"></button>
             </form>
-            <button id="edit<%=post.post_id%>" class="edit" onclick="handler('<%=post.post_id%>')"><img class="icon"
-              src="/images/pencil-solid.svg" alt="pencil image"></button>
+            <button id="edit<%=post.post_id%>" class="btn btn-dark heighten" onclick="handler('<%=post.post_id%>')"><img class="icon"
+              src="/images/edit.svg" alt="edit icon"></button>
           </div>
         </div>
         <% } %>
         <form class="item" action="/add" method="post">
           <input type="text" name="newItem" placeholder="New Post" autocomplete="off" autofocus="true" />
-          <button class="add" type="submit" name="list" value="none" >+</button>
+          <button class="btn btn-dark" type="submit" name="list" value="none" ><img class="heighten"
+            src="/images/add.svg" alt="add icon"></button>
         </form>
       </div>
     </div>
