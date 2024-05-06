@@ -86,7 +86,9 @@ button.add {
 }
   input[type="text"]:focus {
     outline: none;
-    box-shadow: inset 0 -3px 0 0 #6424db;
+    box-shadow: 0 2px 2px -1px rgb(131, 16, 207),
+                0 5px 5px -3px rgb(84, 12, 216),
+                0 8px 8px -6px rgb(8, 6, 124);
 }
   ::placeholder {
     color: lightgray;
