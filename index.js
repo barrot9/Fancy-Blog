@@ -31,7 +31,7 @@ let texts = [
   ];
 
 app.get("/", (req, res) => {
-  res.render("home.ejs");
+  res.render("starting-page.ejs");
 });
 
 app.get("/login", (req, res) => {
@@ -42,11 +42,11 @@ app.get("/register", (req, res) => {
   res.render("register.ejs");
 });
 
-app.get("/index", async (req, res) => {
+app.get("/home", async (req, res) => {
     try{
         const result = await db.query("SELECT * FROM posts ORDER BY post_id ASC");
         texts = result.rows;
-        res.render("index.ejs" , { currentPage: 'Home' , Title: "Posts:", posts: texts, });
+        res.render("home.ejs" , { currentPage: 'Home' , Title: "Posts:", posts: texts, });
     }
     catch (err) {
         console.log(err);
@@ -76,7 +76,7 @@ app.post("/register", async (req, res) => {
             "INSERT INTO users (username, password) VALUES ($1, $2)",
             [email, hash]
           );
-          res.redirect("/index");
+          res.redirect("/home");
         }
       });
     }
@@ -101,7 +101,7 @@ app.post("/login", async (req, res) => {
           console.error("Error comparing passwords:", err);
         } else {
           if (result) {
-            res.redirect("/index");
+            res.redirect("/home");
           } else {
             res.send("Incorrect Password");
           }
@@ -119,7 +119,7 @@ app.post("/add", async (req, res) => {
     const item = req.body.newItem;
     try {
       await db.query("INSERT INTO posts (post_content) VALUES ($1)", [item]);
-      res.redirect("/index");
+      res.redirect("/home");
     } catch (err) {
       console.log(err);
     }
@@ -130,7 +130,7 @@ app.post("/edit", async (req, res) => {
     const id = req.body.updatedItemId;
     try {
       await db.query("UPDATE posts SET post_content = ($1) WHERE post_id = $2", [item, id]);
-      res.redirect("/index");
+      res.redirect("/home");
     } catch (err) {
       console.log(err);
     }
@@ -140,7 +140,7 @@ app.post("/delete", async (req, res) => {
     const id = req.body.deleteItemId;
     try {
       await db.query("DELETE FROM posts WHERE post_id = $1", [id]);
-      res.redirect("/index");
+      res.redirect("/home");
     } catch (err) {
       console.log(err);
     }

@@ -94,3 +94,6 @@ button.add {
     color: lightgray;
     opacity: 1;
 }
+.add-post{
+    padding: 30px;
+}
